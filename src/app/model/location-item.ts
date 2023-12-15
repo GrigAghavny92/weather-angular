@@ -1,4 +1,4 @@
-export interface LocationBasis {
+export interface LocationItem {
   name: string;
   country: string;
   state: string;

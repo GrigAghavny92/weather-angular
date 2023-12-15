@@ -1,4 +1,4 @@
-import {DailyWeather} from "./weather-forecast";
+import {DailyWeather} from "./daily-weather";
 import {CurrentWeather} from "./current-weather";
 
 export interface WeatherResult {

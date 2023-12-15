@@ -2,7 +2,7 @@ import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {LocationProvider} from "../../service/location-provider";
 import {BehaviorSubject, catchError, map, Observable, of} from "rxjs";
 import {LocationCoordinates} from "../../model/coordinates";
-import {LocationBasis} from "../../model/location-list";
+import {LocationItem} from "../../model/location-item";
 
 @Component({
   selector: 'app-location-search',
@@ -14,7 +14,7 @@ export class LocationSearchComponent implements OnInit {
   @Output()
   public selectedLocation: EventEmitter<LocationCoordinates> = new EventEmitter();
 
-  public searchResult$: Observable<LocationBasis[]> = new BehaviorSubject([]);
+  public searchResult$: Observable<LocationItem[]> = new BehaviorSubject([]);
   public hiddenSearchResult = true;
 
   public showWarning = false;

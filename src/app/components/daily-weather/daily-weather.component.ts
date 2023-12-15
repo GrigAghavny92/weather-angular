@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {DailyWeather} from "../../model/weather-forecast";
+import {DailyWeather} from "../../model/daily-weather";
 import {TemperatureType} from "../../pipes/temperature.pipe";
 import {DateTimeUtils} from "../../utils/date-time-utils";
 

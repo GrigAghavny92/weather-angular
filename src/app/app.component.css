@@ -87,7 +87,7 @@
     height: 60px;
     display: grid;
     align-items: center;
-    background-color: #1976d2;
+    background-color: #C3B1E1;
     /*color: white;*/
     font-weight: 600;
 }
@@ -282,7 +282,7 @@ label {
 }
 
 .current-location-btn {
-  background-color: DodgerBlue;
+  background-color: mediumpurple;
   border: none;
   color: white;
   padding: 7px 10px;

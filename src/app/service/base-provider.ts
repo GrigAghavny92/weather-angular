@@ -1,6 +1,6 @@
 import {catchError, Observable} from "rxjs";
 
-export class ProviderBase {
+export class BaseProvider {
 
   public static readonly APP_ID = '31b1715eea27e8546c5192709d456eb7';
 

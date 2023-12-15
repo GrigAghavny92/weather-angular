@@ -2,12 +2,12 @@ import {Injectable} from "@angular/core";
 import {HttpClient, HttpParams} from "@angular/common/http";
 import {Observable, of} from "rxjs";
 
-import {ProviderBase} from "./provider-base";
 import {DataStoreService} from "./data-store.service";
-import {LocationBasis} from "../model/location-list";
+import {BaseProvider} from "./base-provider";
+import {LocationItem} from "../model/location-item";
 
 @Injectable()
-export class LocationProvider extends ProviderBase {
+export class LocationProvider extends BaseProvider {
 
   public static readonly API_URL = 'http://api.openweathermap.org/geo/1.0/direct';
 
@@ -24,7 +24,7 @@ export class LocationProvider extends ProviderBase {
             .set('q', name)
             .set('limit', 5)
         }
-      return this.http.get<LocationBasis[]>(LocationProvider.API_URL, options)
+      return this.http.get<LocationItem[]>(LocationProvider.API_URL, options)
         .pipe(this.handleError(of([])))
     })
   }
