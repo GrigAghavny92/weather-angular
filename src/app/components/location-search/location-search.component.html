@@ -1,0 +1,15 @@
+<div class="search-input">
+  <form class="no-submit">
+    <input class="no-submit" type="search" placeholder="Search..." id="locationSearchInput">
+  </form>
+  <div *ngIf="showWarning" class="warning-container">There's no matching location to your search.</div>
+  <div class="location-search-result-el"
+       *ngIf="searchResult$ | async as searchResult"
+       [hidden]="hiddenSearchResult">
+    <ul *ngIf="searchResult.length">
+      <li *ngFor="let location of searchResult" (click)="emitLocationSelected(location.lat, location.lon);">
+        <span class="search-result-item">{{[location.country,  location.name].join(' / ')}}</span>
+      </li>
+    </ul>
+  </div>
+</div>

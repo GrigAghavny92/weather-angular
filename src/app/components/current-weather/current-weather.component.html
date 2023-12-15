@@ -1,0 +1,46 @@
+<div>
+  <section class="current-forecast-container">
+    <div class="outside time">
+      {{ localDate }}
+    </div>
+    <div>
+      <h2 style="margin-top: 0px;">{{locationName}}</h2>
+    </div>
+    <div style="float: left;">
+      <img src="http://openweathermap.org/img/w/{{currentWeather.weather[0].icon}}.png" alt="Forcast" />
+    </div>
+    <div class="temp-container">
+      <div class="temp">
+        {{currentWeather.temp | temperature: tempType}}
+      </div>
+      <div class="real-feel">
+        Feels Like {{currentWeather.feels_like | temperature: tempType}}
+      </div>
+    </div>
+    <div class="outside">
+      {{ getOutsideDescription() }}
+    </div>
+  </section>
+  <section class="current-forecast-details-container">
+    <div class="details-row">
+      <span>Humidity</span>
+      <span class="details-value">{{ currentWeather.humidity }}%</span>
+    </div>
+    <div class="details-row">
+      <span>Wind Speed / Direction</span>
+      <span class="details-value">{{ currentWeather.wind_speed}} mph / {{ currentWeather.wind_deg }}</span>
+    </div>
+    <div class="details-row">
+      <span>Cloud Coverage</span>
+      <span class="details-value">{{ currentWeather.clouds }}%</span>
+    </div>
+    <div class="details-row">
+      <span>Dew Point</span>
+      <span class="details-value">{{ currentWeather.dew_point}}%</span>
+    </div>
+    <div class="details-row">
+      <span>Visibility</span>
+      <span class="details-value">{{ currentWeather.visibility}}%</span>
+    </div>
+  </section>
+</div>

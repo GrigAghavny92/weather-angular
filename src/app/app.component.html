@@ -1,0 +1,63 @@
+<body>
+  <nav class="toolbar nav el" role="banner">
+    <div class="site-title nav-el">{{ title }}</div>
+
+    <div class="nav-el current-location-button-el">
+      <button id='currentLocation' class="current-location-btn">
+        <mat-icon> location_on</mat-icon>
+      </button>
+    </div>
+
+    <div class="toolbar-location-search nav-el">
+      <app-location-search
+        (selectedLocation)="getWeatherByCoordinates($event)">
+      </app-location-search>
+    </div>
+
+    <div class="toolbar-temp-scale nav-el">
+      <div>
+        <input type="radio" id="fahrRadio" [value]="tempScales.FAHRENHEIT"
+               [checked]="tempType === tempScales.FAHRENHEIT" [(ngModel)]="tempType" />
+        <label for="fahrRadio">&deg;F</label>
+
+        <input type="radio" id="celsRadio" [value]="tempScales.CELSIUS"
+               [checked]="tempType === tempScales.CELSIUS" [(ngModel)]="tempType"/>
+        <label for="celsRadio">&deg;C</label>
+      </div>
+    </div>
+  </nav>
+
+  <div *ngIf="loading$ | async">
+    <section class="spinner-container">
+      <div>
+        <mat-spinner></mat-spinner>
+      </div>
+    </section>
+  </div>
+
+  <main class="container" *ngIf="weatherResult$ | async as weatherResult" [hidden]="loading$ | async">
+
+    <div class="box">
+      <app-current-weather *ngIf="drawWeatherTemplate"
+        [currentWeather]="weatherResult.current"
+        [timezone]="weatherResult.timezone"
+        [tempType]="tempType">
+      </app-current-weather>
+    </div>
+
+    <div class="box daily-container" *ngIf="drawWeatherTemplate">
+      <div class="daily-forecast-title">
+        <h2> <span>{{ weatherResult?.daily?.length }}</span> Day Forecast</h2>
+      </div>
+      <app-carousel [data]="weatherResult.daily || []">
+        <ng-template let-item>
+          <app-daily-weather
+            [forecast]="item"
+            [tempType]="tempType"
+            [timezone]="weatherResult.timezone">
+          </app-daily-weather>
+        </ng-template>
+      </app-carousel>
+    </div>
+  </main>
+</body>
