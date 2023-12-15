@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from "@angular/core";
+import {Component, Input, OnInit, SimpleChanges} from "@angular/core";
 import {TemperatureType} from "../../pipes/temperature.pipe";
 import {CurrentWeather} from "../../model/current-weather";
 import {DateTimeUtils} from "../../utils/date-time-utils";
@@ -8,7 +8,7 @@ import {DateTimeUtils} from "../../utils/date-time-utils";
   templateUrl: 'current-weather.component.html',
   styleUrls: ['current-weather.component.css']
 })
-export class CurrentWeatherComponent implements OnInit{
+export class CurrentWeatherComponent {
 
   @Input()
   public currentWeather: CurrentWeather = {} as CurrentWeather;
@@ -25,9 +25,14 @@ export class CurrentWeatherComponent implements OnInit{
 
   constructor() { }
 
-  ngOnInit(): void {
-    this.localDate = this.getLocalDateString();
-    this.locationName = this.timezone.split('/')[1];
+  ngOnChanges(changes: SimpleChanges) {
+    const timeZoneChanged = changes['timezone'];
+
+    if (timeZoneChanged) {
+      this.localDate = this.getLocalDateString();
+      this.locationName = this.timezone.split('/')[1];
+    }
+
   }
 
   getOutsideDescription() {

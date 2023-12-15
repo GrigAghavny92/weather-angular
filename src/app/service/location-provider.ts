@@ -1,6 +1,6 @@
 import {Injectable} from "@angular/core";
 import {HttpClient, HttpParams} from "@angular/common/http";
-import {Observable, of} from "rxjs";
+import {Observable, of, shareReplay} from "rxjs";
 
 import {DataStoreService} from "./data-store.service";
 import {BaseProvider} from "./base-provider";
@@ -25,7 +25,9 @@ export class LocationProvider extends BaseProvider {
             .set('limit', 5)
         }
       return this.http.get<LocationItem[]>(LocationProvider.API_URL, options)
-        .pipe(this.handleError(of([])))
+        .pipe(
+          shareReplay({ bufferSize: 1, refCount: true }),
+          this.handleError(of([])))
     })
   }
 }

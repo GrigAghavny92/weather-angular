@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {Observable, of} from 'rxjs';
+import {Observable, of, shareReplay} from 'rxjs';
 import {HttpClient, HttpParams} from "@angular/common/http";
 
 import {DataStoreService} from "./data-store.service";
@@ -29,6 +29,7 @@ export class WeatherForecastProvider extends BaseProvider {
         }
       return this.http.get<WeatherResult>(WeatherForecastProvider.API_URL, options)
         .pipe(
+          shareReplay({ bufferSize: 1, refCount: true }),
           this.handleError(of({} as WeatherResult))
         )
     })
